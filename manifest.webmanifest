@@ -1,0 +1,11 @@
+{
+  "name": "Sổ điểm cá nhân",
+  "short_name": "Sổ điểm",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f5f4",
+  "theme_color": "#1f6f5c",
+  "lang": "vi",
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
