@@ -1,5 +1,5 @@
 // Sổ điểm cá nhân – chạy được khi mất mạng
-const C='sdcn-v1';
+const C='sdcn-v2';
 const CORE=['./','index.html','manifest.webmanifest','icon.svg',
   'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'];

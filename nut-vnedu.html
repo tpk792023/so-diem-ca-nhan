@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cài nút dấu trang</title>
+<meta name="description" content="Hướng dẫn cài nút dấu trang của Sổ điểm cá nhân. Nút chỉ điền điểm vào ô để giáo viên tự kiểm tra; không đăng nhập, không hỏi mật khẩu, không tự lưu.">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#f3f5f4;--card:#fff;--ink:#1d2623;--mut:#66736e;--line:#dde3e0;--pri:#1f6f5c;--acc:#d9822b}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121715;--card:#1b2220;--ink:#e7eeeb;--mut:#9aa8a2;--line:#2c3633;--pri:#4fb398;--acc:#f0a14e}}
+:root[data-theme="dark"]{--bg:#121715;--card:#1b2220;--ink:#e7eeeb;--mut:#9aa8a2;--line:#2c3633;--pri:#4fb398;--acc:#f0a14e}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+h1{font-size:20px;margin:4px 0 12px}h2{font-size:16px;margin:0 0 8px}
+.mut{color:var(--mut);font-size:14px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 14px;font:inherit;cursor:pointer}
+.bm{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:12px;margin:8px 0}
+ol{padding-left:20px}li{margin:4px 0}
+a{color:var(--pri)}
+</style>
+</head>
+<body>
+<main>
+  <p><a href="./">← Về Sổ điểm cá nhân</a></p>
+  <h1>Cài nút dấu trang “Sổ điểm cá nhân”</h1>
+  <div class="card">
+    <h2>Nút này làm gì?</h2>
+    <p class="mut">Khi thầy đang mở sổ điểm trên trang quản lý điểm của trường (đã tự đăng nhập), bấm nút này sẽ hiện một khung nhỏ để: điền các điểm thầy đã ghi vào ô trống và tô màu cho thầy kiểm tra; hoặc lấy danh sách lớp. Nút <b>không</b> hỏi mật khẩu, <b>không</b> tự bấm Lưu, <b>không</b> gửi dữ liệu đi nơi khác. Mã nguồn công khai: <a href="vnedu.js">vnedu.js</a>.</p>
+  </div>
+  <div class="card">
+    <h2>Cách cài (trên máy tính)</h2>
+    <ol>
+      <li>Hiện thanh dấu trang: bấm <b>Ctrl + Shift + B</b>.</li>
+      <li>Bấm <button class="btn" id="show">Hiện nút để kéo</button></li>
+      <li>Kéo nút cam xuất hiện bên dưới lên thanh dấu trang (đừng bấm vào nó ở trang này).</li>
+    </ol>
+    <div id="slot"></div>
+  </div>
+</main>
+<script>
+document.getElementById('show').onclick=function(){
+  var base=location.href.split('#')[0].split('?')[0].replace(/[^\/]*$/,'');
+  var a=document.createElement('a');a.className='bm';a.textContent='📒 Sổ điểm cá nhân';
+  a.href='javascript:(function(){var s=document.createElement(\'script\');s.src=\''+base+'vnedu.js?t=\'+Date.now();s.charset=\'utf-8\';document.body.appendChild(s);})();';
+  a.onclick=function(e){e.preventDefault();alert('Hãy kéo nút này lên thanh dấu trang.');};
+  var slot=document.getElementById('slot');slot.innerHTML='';slot.appendChild(a);this.disabled=true;
+};
+</script>
+</body>
+</html>

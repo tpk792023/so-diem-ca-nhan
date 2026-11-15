@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sổ điểm cá nhân</title>
 <meta name="theme-color" content="#1f6f5c">
+<meta name="description" content="Sổ điểm cá nhân của giáo viên: ghi điểm thường xuyên, giữa kì, cuối kì trên điện thoại, lưu ngay trên máy. Không đăng nhập, không thu thập mật khẩu, không gửi dữ liệu đi nơi khác.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -138,6 +139,7 @@ textarea.code{width:100%;min-height:90px;border-radius:10px;border:1px solid var
       </div>
       <div class="list" id="list"></div>
       <p class="mut" style="text-align:center;margin-top:10px">Bấm tên học sinh → bấm số. Điểm lưu ngay trên máy này, không cần mạng.</p>
+      <p class="mut" style="text-align:center;font-size:12px">Trang không có đăng nhập, không hỏi mật khẩu, không gửi điểm đi đâu – mọi dữ liệu nằm trong trình duyệt của máy này.</p>
     </div>
   </section>
 
@@ -198,12 +200,7 @@ textarea.code{width:100%;min-height:90px;border-radius:10px;border:1px solid var
     </div>
     <div class="card">
       <h2>Cách 1 – Nút dấu trang điền vào sổ điểm đang mở</h2>
-      <p class="mut">Làm trên máy tính (Chrome/Cốc Cốc/Edge). Cài nút một lần:</p>
-      <ol class="steps">
-        <li>Hiện thanh dấu trang: bấm <b>Ctrl + Shift + B</b>.</li>
-        <li>Kéo nút cam này lên thanh dấu trang:<br><a class="bm" id="bmLink" href="#">📒 Sổ điểm cá nhân</a></li>
-        <li>Kéo không được thì bấm <button class="btn" id="bCopyBm" style="min-height:32px;padding:4px 10px">Chép mã nút</button>, tạo dấu trang mới, dán mã vào ô URL.</li>
-      </ol>
+      <p class="mut">Làm trên máy tính. Cài nút dấu trang một lần ở trang <a href="nut-vnedu.html">Cài nút dấu trang</a>.</p>
       <p class="mut" style="margin-bottom:4px">Mỗi lần đưa điểm:</p>
       <ol class="steps">
         <li>Nếu nhập điểm trên điện thoại: bấm <b>📤 Gửi file điểm</b> (mục Lớp & file), gửi sang máy tính.</li>
@@ -614,12 +611,6 @@ function buildXls(c){
 $('#bXls1').onclick=()=>{const c=S.classes[$('#selCls3').value];if(!c)return toast('Chưa có lớp');const f=buildXls(c);download(new Blob([f.data],{type:'application/vnd.ms-excel'}),f.name)};
 $('#bXlsAll').onclick=async()=>{if(!S.order.length)return toast('Chưa có lớp');const z=new JSZip();S.order.forEach(id=>{const f=buildXls(S.classes[id]);z.file(f.name,f.data)});
   download(await z.generateAsync({type:'blob'}),`so-diem-vnedu-${stamp()}.zip`)};
-
-/* ---------- nút dấu trang ---------- */
-const BM=`javascript:(function(){var s=document.createElement('script');s.src='${APP_URL}vnedu.js?t='+Date.now();s.charset='utf-8';document.body.appendChild(s);})();`;
-$('#bmLink').href=BM;
-$('#bmLink').onclick=e=>{e.preventDefault();toast('Kéo nút này lên thanh dấu trang (đừng bấm).')};
-$('#bCopyBm').onclick=async()=>{try{await navigator.clipboard.writeText(BM);toast('Đã chép mã nút dấu trang')}catch(e){prompt('Chép mã này:',BM)}};
 
 /* ---------- liên lạc với nút trên vnEdu ---------- */
 const okOrigin=o=>{try{return/(^|\.)vnedu\.vn$/i.test(new URL(o).hostname)}catch(e){return false}};
